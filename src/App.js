@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import './TyperTester.css';
+import { ProgressBar } from 'react-bootstrap';
 
 const languages = [  { id: 1, name: 'Ruby' },  { id: 2, name: 'JavaScript' },  { id: 3, name: 'Python' },  { id: 4, name: 'C' },  { id: 5, name: 'Go' },  { id: 6, name: 'Assembly (16-bit x86)' },  { id: 7, name: 'Machine Code' },  { id: 8, name: 'Java' },]
 
@@ -15,6 +17,7 @@ function TyperTester() {
   const [currentCode, setCurrentCode] = useState(codeSamples[selectedLanguage]);
   const [isCorrect, setIsCorrect] = useState(true);
   const [nextLetter, setNextLetter] = useState("");
+  const [typingProgress, setTypingProgress] = useState(0);
 
   const handleLanguageChange = (event) => {
     setSelectedLanguage(event.target.value);
@@ -22,10 +25,12 @@ function TyperTester() {
     setUserInput("");
     setIsCorrect(true);
     setNextLetter("");
+    setTypingProgress(0);
   };
 
   const handleChange = (event) => {
     setUserInput(event.target.value);
+    setTypingProgress((event.target.value.length / currentCode.length) * 100);
     if (event.target.value === currentCode.substring(0, event.target.value.length)) {
       setIsCorrect(true);
       setNextLetter(currentCode[event.target.value.length]);
@@ -35,39 +40,43 @@ function TyperTester() {
   };
 
   const handleKeyPress = (event) => {
-    if(event.target.value === currentCode) {
-      setEndTime(new Date());
+    if (event.target.value === currentCode) {
+      setEndTime(Date.now());
       setTimeTaken((endTime - startTime) / 1000);
-    } else {
-      if (!startTime) {
-        setStartTime(new Date());
-      }
     }
   };
 
+  const handleStart = () => {
+    setStartTime(Date.now());
+  };
+
   return (
-    <div>
+    <div className="typer-tester">
       <label>Select Language:</label>
       <select value={selectedLanguage} onChange={handleLanguageChange}>
-        {languages.map(language => <option value={language.id}
-                key={language.id}>{language.name}</option>)}
-                </select>
-                <pre>
-                  {currentCode.split('').map((char, index) => {
-                    if (index === userInput.length && isCorrect) {
-                      return <span style={{color: 'green'}} key={index}>{char}</span>
-                    } else if (index === userInput.length && !isCorrect) {
-                      return <span style={{color: 'red'}} key={index}>{char}</span>
-                    } else {
-                      return <span key={index}>{char}</span>
-                    }
-                  })}
-                </pre>
-                <textarea value={userInput} onChange={handleChange} onKeyPress={handleKeyPress} />
-                { endTime && <p>Time Taken: {timeTaken} seconds</p> }
-              </div>
-            );
+        {languages.map(language => 
+          <option value={language.id} key={language.id}>{language.name}</option>)}
+      </select>
+      <div className="code-display">
+        {currentCode.split('').map((char, index) => {
+          if (index === userInput.length && isCorrect) {
+            return <span className="correct" key={index}>{char}</span>
+          } else if (index === userInput.length && !isCorrect) {
+            return <span className="incorrect" key={index}>{char}</span>
+          } else {
+            return <span key={index}>{char}</span>
           }
-          
-          export default TyperTester;
-          
+        })}
+      </div>
+      <textarea value={userInput} onChange={handleChange} onKeyPress={handleKeyPress} />
+      <div className="progress">
+        <ProgressBar now={typingProgress} label={`${typingProgress}%`} />
+      </div>
+      <button className="start-button" onClick={handleStart}>START</button>
+      { endTime && <p>Time Taken: {timeTaken} seconds</p> }
+    </div>
+  );
+}
+
+export default TyperTester;
+

@@ -1,0 +1,66 @@
+.typer-tester {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-family: Arial, sans-serif;
+  }
+  
+  .typer-tester label {
+    margin-bottom: 10px;
+    font-size: 18px;
+  }
+  
+  .typer-tester select {
+    margin-bottom: 20px;
+    padding: 10px;
+    font-size: 16px;
+  }
+  
+  .code-display {
+    width: 50%;
+    margin: 20px 0;
+    padding: 20px;
+    background-color: #f2f2f2;
+    border-radius: 10px;
+    font-size: 18px;
+    text-align: left;
+  }
+  
+  .code-display .correct {
+    color: green;
+  }
+  
+  .code-display .incorrect {
+    color: red;
+  }
+  
+  .typer-tester textarea {
+    width: 50%;
+    margin-bottom: 20px;
+    padding: 20px;
+    font-size: 18px;
+    border-radius: 10px;
+    border: none;
+    outline: none;
+    resize: none;
+  }
+  
+  .progress {
+    width: 50%;
+  }
+  
+  .start-button {
+    margin-top: 20px;
+    padding: 10px 20px;
+    background-color: #4CAF50;
+    color: white;
+    font-size: 18px;
+    border-radius: 10px;
+    border: none;
+    cursor: pointer;
+  }
+  
+  .start-button:hover {
+    background-color: #3e8e41;
+  }
+  
