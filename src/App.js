@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import './TyperTester.css';
 import { ProgressBar } from 'react-bootstrap';
+import 'bootstrap/dist/css/bootstrap.css';
 
 const languages = [  { id: 1, name: 'Ruby' },  { id: 2, name: 'JavaScript' },  { id: 3, name: 'Python' },  { id: 4, name: 'C' },  { id: 5, name: 'Go' },  { id: 6, name: 'Assembly (16-bit x86)' },  { id: 7, name: 'Machine Code' },  { id: 8, name: 'Java' },]
 
