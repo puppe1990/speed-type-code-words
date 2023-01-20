@@ -22,8 +22,40 @@
     padding: 20px;
     background-color: #f2f2f2;
     border-radius: 10px;
-    font-size: 18px;
+    font-size: 20pt;
     text-align: left;
+  }
+  
+  .code-display .ruby {
+    color: #701516;
+  }
+  
+  .code-display .javascript {
+    color: #f1e05a;
+  }
+  
+  .code-display .python {
+    color: #3572A5;
+  }
+  
+  .code-display .c {
+    color: #555555;
+  }
+  
+  .code-display .go {
+    color: #00ADD8;
+  }
+  
+  .code-display .assembly {
+    color: #6E4C13;
+  }
+  
+  .code-display .machine-code {
+    color: #000000;
+  }
+  
+  .code-display .java {
+    color: #b07219;
   }
   
   .code-display .correct {
@@ -32,7 +64,7 @@
   
   .code-display .incorrect {
     color: red;
-  }
+  }  
   
   .typer-tester textarea {
     width: 50%;
