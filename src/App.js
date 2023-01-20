@@ -35,9 +35,10 @@ function TyperTester() {
     if(event.target.value === currentCode) {
       setEndTime(new Date());
       setTimeTaken((endTime - startTime) / 1000);
-    }
-    else {
-      setStartTime(new Date());
+    } else {
+      if (!startTime) {
+        setStartTime(new Date());
+      }
     }
   };
 
@@ -46,12 +47,12 @@ function TyperTester() {
       <label>Select Language:</label>
       <select value={selectedLanguage} onChange={handleLanguageChange}>
         {languages.map(language => <option value={language.id} key={language.id}>{language.name}</option>)}
-</select>
-<pre>{currentCode}</pre>
-<textarea value={userInput} onChange={handleChange} onKeyPress={handleKeyPress} />
-{ endTime && <p>Time Taken: {timeTaken} seconds</p> }
-</div>
-);
+      </select>
+      <pre>{currentCode}</pre>
+      <textarea value={userInput} onChange={handleChange} onKeyPress={handleKeyPress} />
+      { endTime && <p>Time Taken: {timeTaken} seconds</p> }
+    </div>
+  );
 }
 
 export default TyperTester;
