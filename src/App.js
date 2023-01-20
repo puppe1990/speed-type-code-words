@@ -4,13 +4,6 @@ const languages = [  { id: 1, name: 'Ruby' },  { id: 2, name: 'JavaScript' },  {
 
 const codeSamples = {
   1: 'puts "Hello, World!"',
-  2: 'console.log("Hello, World!");',
-  3: 'print("Hello, World!")',
-  4: '#include <stdio.h>\n\nint main() {\n  printf("Hello, World!");\n  return 0;\n}',
-  5: 'package main\n\nimport "fmt"\n\nfunc main() {\n  fmt.Println("Hello, World!")\n}',
-  6: 'section .data\n  msg db "Hello, World!", 0\nsection .text\n  global _start\n\n_start:\n  mov edx, 13\n  mov ecx, msg\n  mov ebx, 1\n  mov eax, 4\n  int 0x80\n\n  mov eax, 1\n  int 0x80',
-  7: '48 65 6c 6c 6f 2c 20 57 6f 72 6c 64 21 0a',
-  8: 'public class Main {\n  public static void main(String[] args) {\n    System.out.println("Hello, World!");\n  }\n}'
 }
 
 function TyperTester() {
@@ -20,15 +13,25 @@ function TyperTester() {
   const [startTime, setStartTime] = useState(null);
   const [endTime, setEndTime] = useState(null);
   const [currentCode, setCurrentCode] = useState(codeSamples[selectedLanguage]);
+  const [isCorrect, setIsCorrect] = useState(true);
+  const [nextLetter, setNextLetter] = useState("");
 
   const handleLanguageChange = (event) => {
     setSelectedLanguage(event.target.value);
     setCurrentCode(codeSamples[event.target.value]);
     setUserInput("");
+    setIsCorrect(true);
+    setNextLetter("");
   };
 
   const handleChange = (event) => {
     setUserInput(event.target.value);
+    if (event.target.value === currentCode.substring(0, event.target.value.length)) {
+      setIsCorrect(true);
+      setNextLetter(currentCode[event.target.value.length]);
+    } else {
+      setIsCorrect(false);
+    }
   };
 
   const handleKeyPress = (event) => {
@@ -46,13 +49,25 @@ function TyperTester() {
     <div>
       <label>Select Language:</label>
       <select value={selectedLanguage} onChange={handleLanguageChange}>
-        {languages.map(language => <option value={language.id} key={language.id}>{language.name}</option>)}
-      </select>
-      <pre>{currentCode}</pre>
-      <textarea value={userInput} onChange={handleChange} onKeyPress={handleKeyPress} />
-      { endTime && <p>Time Taken: {timeTaken} seconds</p> }
-    </div>
-  );
-}
-
-export default TyperTester;
+        {languages.map(language => <option value={language.id}
+                key={language.id}>{language.name}</option>)}
+                </select>
+                <pre>
+                  {currentCode.split('').map((char, index) => {
+                    if (index === userInput.length && isCorrect) {
+                      return <span style={{color: 'green'}} key={index}>{char}</span>
+                    } else if (index === userInput.length && !isCorrect) {
+                      return <span style={{color: 'red'}} key={index}>{char}</span>
+                    } else {
+                      return <span key={index}>{char}</span>
+                    }
+                  })}
+                </pre>
+                <textarea value={userInput} onChange={handleChange} onKeyPress={handleKeyPress} />
+                { endTime && <p>Time Taken: {timeTaken} seconds</p> }
+              </div>
+            );
+          }
+          
+          export default TyperTester;
+          
