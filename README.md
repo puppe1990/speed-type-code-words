@@ -1,5 +1,6 @@
 # TyperTester
 TyperTester is a simple app that allows users to test their typing speed and accuracy in different programming languages.
+![image](https://user-images.githubusercontent.com/8432835/213872969-b88340fd-be4e-40ab-b2ec-40ce147d669b.png)
 
 # Features
 * Display box for a paragraph of text that the user will type
