@@ -32,11 +32,11 @@ function TyperTester() {
   );
 
   const handleLanguageChange = (event) => {
-    setSelectedLanguage(event.target.value);
-    setCurrentCode(codeSamples[event.target.value]);
+    const selectedValue = parseInt(event.target.value, 10);
+    setSelectedLanguage(selectedValue);
+    setCurrentCode(codeSamples[selectedValue]);
     setUserInput("");
     setIsCorrect(true);
-    setNextLetter("");
     setTypingProgress(0);
   };
 
