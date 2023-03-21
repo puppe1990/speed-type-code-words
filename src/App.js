@@ -63,14 +63,21 @@ function TyperTester() {
   };
 
   const handleKeyUp = (event) => {
-    setUserInput(event.target.value);
+    const typedChars = event.target.value;
+    let correctChars = "";
 
-    let typedChars = event.target.value;
-    let correctChars = currentCode.slice(0, typedChars.length);
+    for (let i = 0; i < typedChars.length; i++) {
+      if (typedChars[i] === currentCode[i]) {
+        correctChars += typedChars[i];
+      } else {
+        break;
+      }
+    }
 
-    // Calculate the progress based on the number of correctly typed characters
-    let progress = (correctChars.length / currentCode.length) * 100;
+    const progress = (correctChars.length / currentCode.length) * 100;
     setTypingProgress(progress);
+
+    setUserInput(typedChars);
   };
 
   return (
