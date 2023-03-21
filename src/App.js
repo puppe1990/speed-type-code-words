@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import "./TyperTester.css";
 import { ProgressBar } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.css";
+import { Light as SyntaxHighlighter } from "react-syntax-highlighter";
+import { darcula } from "react-syntax-highlighter/dist/esm/styles/prism";
 
 const languages = [
   { id: 1, name: "Ruby" },
@@ -25,6 +27,9 @@ function TyperTester() {
   const [isCorrect, setIsCorrect] = useState(true);
   const [nextLetter, setNextLetter] = useState("");
   const [typingProgress, setTypingProgress] = useState(0);
+  const [editableCode, setEditableCode] = useState(
+    codeSamples[selectedLanguage]
+  );
 
   const handleLanguageChange = (event) => {
     setSelectedLanguage(event.target.value);
@@ -42,10 +47,13 @@ function TyperTester() {
       event.target.value === currentCode.substring(0, event.target.value.length)
     ) {
       setIsCorrect(true);
-      setNextLetter(currentCode[event.target.value.length]);
     } else {
       setIsCorrect(false);
     }
+  };
+
+  const handleCodeEdit = (event) => {
+    setEditableCode(event.target.value);
   };
 
   const handleKeyPress = (event) => {
@@ -70,23 +78,26 @@ function TyperTester() {
         ))}
       </select>
       <div className="code-display">
-        {currentCode.split("").map((char, index) => {
-          if (index === userInput.length && isCorrect) {
-            return (
-              <span className="correct" key={index}>
-                {char}
-              </span>
-            );
-          } else if (index === userInput.length && !isCorrect) {
-            return (
-              <span className="incorrect" key={index}>
-                {char}
-              </span>
-            );
-          } else {
-            return <span key={index}>{char}</span>;
-          }
-        })}
+        <SyntaxHighlighter
+          language={languages
+            .find((language) => language.id === selectedLanguage)
+            .name.toLowerCase()}
+          style={darcula}
+        >
+          {currentCode}
+        </SyntaxHighlighter>
+      </div>
+      <div className="user-input">
+        <div
+          className="editable-input"
+          contentEditable={true}
+          suppressContentEditableWarning={true}
+          onInput={handleChange}
+          onKeyPress={handleKeyPress}
+          style={{ whiteSpace: "pre-wrap" }}
+        >
+          {userInput}
+        </div>
       </div>
       <textarea
         value={userInput}
