@@ -24,36 +24,25 @@ function TyperTester() {
   const [startTime, setStartTime] = useState(null);
   const [endTime, setEndTime] = useState(null);
   const [currentCode, setCurrentCode] = useState(codeSamples[selectedLanguage]);
-  const [isCorrect, setIsCorrect] = useState(true);
-  const [nextLetter, setNextLetter] = useState("");
   const [typingProgress, setTypingProgress] = useState(0);
-  const [editableCode, setEditableCode] = useState(
-    codeSamples[selectedLanguage]
-  );
 
   const handleLanguageChange = (event) => {
     const selectedValue = parseInt(event.target.value, 10);
     setSelectedLanguage(selectedValue);
     setCurrentCode(codeSamples[selectedValue]);
     setUserInput("");
-    setIsCorrect(true);
     setTypingProgress(0);
   };
 
   const handleChange = (event) => {
     setUserInput(event.target.value);
-    setTypingProgress((event.target.value.length / currentCode.length) * 100);
-    if (
-      event.target.value === currentCode.substring(0, event.target.value.length)
-    ) {
-      setIsCorrect(true);
-    } else {
-      setIsCorrect(false);
-    }
-  };
 
-  const handleCodeEdit = (event) => {
-    setEditableCode(event.target.value);
+    let typedChars = event.target.value;
+    let correctChars = currentCode.slice(0, typedChars.length);
+
+    // Calculate the progress based on the number of correctly typed characters
+    let progress = (correctChars.length / currentCode.length) * 100;
+    setTypingProgress(progress);
   };
 
   const handleKeyPress = (event) => {
