@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import "./TyperTester.css";
 import { ProgressBar } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.css";
-import { Light as SyntaxHighlighter } from "react-syntax-highlighter";
+import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import { darcula } from "react-syntax-highlighter/dist/esm/styles/prism";
 
 const languages = [
