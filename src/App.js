@@ -120,6 +120,47 @@ function TyperTester() {
         START
       </button>
       {endTime && <p>Time Taken: {timeTaken} seconds</p>}
+      <p>Improve Your Typing Speed and Accuracy with Typer Tester</p>
+      <p>
+        Typer Tester is a free typing test application that allows you to
+        practice and improve your typing skills. Choose from multiple
+        programming languages like Ruby, JavaScript and Python and test your
+        speed and accuracy by typing code samples for the selected language.
+      </p>
+      <p>
+        As you type, Typer Tester provides real-time feedback on your progress
+        and words per minute typing speed. The minimal and distraction-free
+        interface allows you to focus on the code you're typing. Track your
+        typing stats over time to see your improvement and achieve your goal of
+        becoming an expert typist.
+      </p>
+      <p>
+        Whether you're a developer looking to practice your craft or an aspiring
+        programmer keen to learn a new coding language, make Typer Tester a part
+        of your daily typing practice. Build muscle memory for key programming
+        syntax and become more confident typing code.
+      </p>
+      {/* Key features section */}
+      <p>
+        <b>Key Features:</b>
+      </p>
+      <ul>
+        <li>Choose between Ruby, JavaScript and Python coding languages</li>
+        <li>
+          Practice typing actual code samples in the language of your choice
+        </li>
+        <li>
+          Get your words per minute typing speed and accuracy results in
+          real-time
+        </li>
+        <li>Minimal interface without ads or distractions</li>
+        <li>Track your typing stats and progress over time</li>
+        <li>Completely free to use</li>
+      </ul>
+      <p>
+        Take your programming and typing skills to the next level with Typer
+        Tester. Start practicing for free today!
+      </p>
     </div>
   );
 }
